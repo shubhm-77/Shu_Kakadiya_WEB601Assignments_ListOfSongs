@@ -19,7 +19,7 @@ export class ContentListComponent{
       description: 'Friends Keep Secrets(2018)',
       creator: 'Benny Blanco, Halsey, Khalid',
       type: 'Pop',
-      imgURL: ''
+      imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/1.jpg'
     };
     const content2: Content = {
       id: 2,
@@ -27,7 +27,7 @@ export class ContentListComponent{
       description: 'Icarus Fall(2018)',
       creator: 'Zayn Malik',
       type: 'Pop',
-      imgURL: ''
+      imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/2.jpg'
     };
     const content3: Content = {
       id: 3,
@@ -35,7 +35,7 @@ export class ContentListComponent{
       description: '÷Divide(2017)',
       creator: 'ED Sheeran',
       type: 'Pop',
-      imgURL: ''
+      imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/3.jpg'
     };
     const content4: Content = {
       id: 4,
@@ -43,7 +43,7 @@ export class ContentListComponent{
       description: 'This Is Acting(2016)',
       creator: 'Sia',
       type: 'Indian Film Pop, Alternative/Indie, R&B/Soul, Electropop, Pop, UK R&B, Dance Pop, Singer-Songwriter',
-      imgURL: ''
+      imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/4.jpg'
     };
     const content5: Content = {
       id: 5,
@@ -51,7 +51,7 @@ export class ContentListComponent{
       description: 'Suncity(2018)',
       creator: 'Khalid',
       type: 'R&B/Soul',
-      imgURL: ''
+      imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/5.jpg'
     };
     const content6: Content = {
       id: 6,
@@ -59,7 +59,7 @@ export class ContentListComponent{
       description: 'When We All Fall Asleep, Where Do We Go?',
       creator: 'Billie Eilish, Khalid',
       type: 'Pop',
-      imgURL: ''
+      imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/6.jpg'
     };
     this.contents.push(content1);
     this.contents.push(content2);
