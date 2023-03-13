@@ -6,7 +6,7 @@ import { Content } from '../helper-files/content-interface';
   templateUrl: './content-list.component.html',
   styleUrls: ['./content-list.component.css'],
 })
-export class ContentListComponent {
+export class ContentListComponent{
   contents: Content[] = [];
   inputTitle: string = '';
   titleSearchMessage: string = '';
