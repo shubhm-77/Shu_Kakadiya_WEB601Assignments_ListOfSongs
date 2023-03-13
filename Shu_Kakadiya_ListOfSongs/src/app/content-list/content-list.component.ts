@@ -61,6 +61,15 @@ export class ContentListComponent{
       type: 'Pop',
       imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/6.jpg'
     };
+
+    const content7: Content = {
+      id: 7,
+      title: 'Infinity',
+      description: 'Feel Something(2017)',
+      creator: 'Jaymes Young',
+      type: 'Alternative/Indie, Children\'s Music, Electronic rock',
+      imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/7.jpg'
+    };
     this.contents.push(content1);
     this.contents.push(content2);
     this.contents.push(content3);
