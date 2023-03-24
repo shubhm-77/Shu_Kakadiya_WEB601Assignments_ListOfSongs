@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Content} from '../helper-files/content-interface';
+
+
+
 
 @Component({
   selector: 'app-content-card',
@@ -7,4 +11,13 @@ import { Component } from '@angular/core';
 })
 export class ContentCardComponent {
 
+
+  @Input() content: Content | undefined;
+
+  constructor() {
+    console.log(this.content);
+  }
+  logInfo(content: Content){
+    console.log('ID: ', content.id, ' TITLE: ', content.title);
+  }
 }
