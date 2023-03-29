@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Input } from '@angular/core';
+import {Content} from '../helper-files/content-interface';
+import{FilterContentPipe} from "../filter-content.pipe";
 
 @Component({
   selector: 'app-content-card',
@@ -6,5 +9,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./content-card.component.scss']
 })
 export class ContentCardComponent {
+  @Input() content: Content;
 
+  constructor(){
+  }
+
+  logInfo(content: Content){
+    console.log('ID: ', content.id, ' Title: ', content.title);
+  }
 }
