@@ -1,18 +1,28 @@
 <!-- <app-content-list></app-content-list> -->
-<input [(ngModel)]="searchText">
-<button (click)="search(searchText)">Submit</button>
+<section class="section">
+  <h2>My Favorite Cricketer</h2>
+  <div>
+    <label for="search">Search</label>
+    <input
+      type="text"
+      id="search"
+      placeholder="Search"
+      (input)="handleInput($event)"
+    />
+    <button (click)="searchContent()">Search</button>
+  </div>
+  <p *ngIf="isAvailable">Available</p>
+  <p *ngIf="!isAvailable">Not Available</p>
+  <ul class="content-list">
+    <li *ngFor="let content of contentList | contentlistpipe">
+      <ul class="content-list">
+        <li *ngFor="let content of contentList">
+          <app-content-card> ></app-content-card>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</section>
+//
 
-<h3>forLoop with type='Exciting' passed to pipe</h3>
-<div *ngFor="let item of (myContentArray | filterContent:'Exciting'); index as i">
-  <app-content-card  [content]="item"></app-content-card>
-</div>
 
-<h3>forLoop with type='Boring' passed to pipe</h3>
-<div *ngFor="let item of (myContentArray | filterContent:'Boring'); index as i">
-  <app-content-card  [content]="item"></app-content-card>
-</div>
-
-<h3>forLoop with no type passed to pipe</h3>
-<div *ngFor="let item of (myContentArray | filterContent); index as i">
-  <app-content-card  [content]="item"></app-content-card>
-</div>

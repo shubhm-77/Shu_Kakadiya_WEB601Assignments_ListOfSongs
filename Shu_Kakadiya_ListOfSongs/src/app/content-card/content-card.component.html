@@ -1,8 +1,19 @@
 <div
-  ngClass="{{ content?.id }}"
+  ngClass="{{ content?.id === 1 ? 'content-card first' : 'content-card' }}"
+  (click)="onPress()"
+  appHoverAffect
 >
   <div class="content-img">
-    <img src="{{ content?.imgURL }}"/>
+    <img
+      *ngIf="content?.imgURL"
+      src="{{ content?.imgURL }}"
+      alt="{{ content?.title }}"
+    />
+    <img
+      *ngIf="!content?.imgURL"
+      src="https://via.placeholder.com/150"
+      alt="{{ content?.title }}"
+    />
   </div>
   <div class="content-card">
 

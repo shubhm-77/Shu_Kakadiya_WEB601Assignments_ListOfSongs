@@ -22,7 +22,7 @@ export class ContentListComponent{
       title: 'Eastside',
       description: 'Friends Keep Secrets(2018)',
       creator: 'Benny Blanco, Halsey, Khalid',
-      imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/1.jpg',
+      //imgURL: '',
       type: 'Pop'
     };
     const content2: Content = {
@@ -30,7 +30,7 @@ export class ContentListComponent{
       title: 'Tonight',
       description: 'Icarus Fall(2018)',
       creator: 'Zayn Malik',
-      imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/2.jpg',
+      //imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/2.jpg',
       type: 'Pop'
     };
     const content3: Content = {
@@ -38,7 +38,7 @@ export class ContentListComponent{
       title: 'Perfect',
       description: '÷Divide(2017)',
       creator: 'ED Sheeran',
-      imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/3.jpg',
+      //imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/3.jpg',
       type: 'Pop'
     };
     const content4: Content = {
@@ -46,7 +46,7 @@ export class ContentListComponent{
       title: 'One Million Bullets',
       description: 'This Is Acting(2016)',
       creator: 'Sia',
-      imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/4.jpg',
+      //imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/4.jpg',
       type: 'Indian Film Pop, Alternative/Indie, R&B/Soul, Electropop, Pop, UK R&B, Dance Pop, Singer-Songwriter'
     };
     const content5: Content = {
@@ -54,7 +54,7 @@ export class ContentListComponent{
       title: 'Better',
       description: 'Suncity(2018)',
       creator: 'Khalid',
-      imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/5.jpg',
+      //imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/5.jpg',
       type: 'R&B/Soul'
     };
     const content6: Content = {
@@ -62,7 +62,7 @@ export class ContentListComponent{
       title: 'Lovely',
       description: 'When We All Fall Asleep, Where Do We Go?',
       creator: 'Billie Eilish, Khalid',
-      imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/6.jpg',
+      //imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/6.jpg',
       type: 'Pop'
     };
 
@@ -71,7 +71,7 @@ export class ContentListComponent{
       title: 'Infinity',
       description: 'Feel Something(2017)',
       creator: 'Jaymes Young',
-      imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/7.jpg',
+      //imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/7.jpg',
       type: 'Alternative/Indie, Children\'s Music, Electronic rock'
     };
     this.content.push(content1);

@@ -5,6 +5,6 @@ export interface Content{
   creator:string;
   imgURL?:string;
   type?:string;
-  tags?:string;
+  tags?:string[];
 
 }

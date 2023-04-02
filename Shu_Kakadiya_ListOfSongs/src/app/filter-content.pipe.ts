@@ -2,18 +2,28 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Content } from './helper-files/content-interface';
 
 @Pipe({
-  name: 'filterContent'
+  name: 'contentlistpipe',
 })
-export class FilterContentPipe implements PipeTransform {
+export class ContentFilterPipe implements PipeTransform {
 
-  transform(contentArray: Array<Content>, type?: string) {
-    console.log(type);
-    if(contentArray) {
-      if(type) {
-        return contentArray.filter(content => content.type === type);
-      } else {
-        return contentArray.filter(content => (content.type === '' || content.type === undefined || content.type === null));
-      }
-    } else return;
+  transform(contentList: Content[]) {
+
+    const types = contentList.map((content) => content.type);
+
+    const uniqueTypes = types.filter(
+      (type, index) => types.indexOf(type) === index
+    );
+
+    const typeArrays = uniqueTypes.map((type) =>
+      contentList.filter((content) => content.type === type)
+    );
+
+    const typeObjects = typeArrays.map((typeArray) => {
+      return {
+        type: typeArray[0].type,
+        content: typeArray,
+      };
+    });
+    return typeObjects;
   }
 }

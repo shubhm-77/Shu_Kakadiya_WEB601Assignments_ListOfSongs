@@ -1,20 +1,20 @@
-import { Component } from '@angular/core';
-import { Input } from '@angular/core';
-import {Content} from '../helper-files/content-interface';
-import{FilterContentPipe} from "../filter-content.pipe";
+import { Component, Input, Pipe, PipeTransform } from '@angular/core';
+import { Content } from '../helper-files/content-interface';
 
 @Component({
   selector: 'app-content-card',
   templateUrl: './content-card.component.html',
-  styleUrls: ['./content-card.component.scss']
+  styleUrls: ['./content-card.component.scss'],
 })
 export class ContentCardComponent {
-  @Input() content: Content;
+  @Input() content: Content | undefined;
 
-  constructor(){
+  constructor() {
+    console.log(this.content);
   }
 
-  logInfo(content: Content){
-    console.log('ID: ', content.id, ' Title: ', content.title);
+  onPress() {
+    console.log('button pressed');
+    console.log(this.content?.id, this.content?.title);
   }
 }
