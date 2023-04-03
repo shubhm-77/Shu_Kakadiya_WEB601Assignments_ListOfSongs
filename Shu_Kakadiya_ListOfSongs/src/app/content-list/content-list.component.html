@@ -1,28 +1,29 @@
 <!-- <app-content-list></app-content-list> -->
 <section class="section">
-  <h2>My Favorite Cricketer</h2>
+  <h2>List Of Songs</h2>
+  <h2>Songs</h2>
+
+  <app-create-content
+    (contentAdded)="onContentAdded($event)"
+  ></app-create-content>
+
   <div>
-    <label for="search">Search</label>
+    <label >Search</label>
     <input
-      type="text"
-      id="search"
-      placeholder="Search"
-      (input)="handleInput($event)"
-    />
-    <button (click)="searchContent()">Search</button>
+      @@ -13,13 +18,8 @@>
+    <h2>List Of Songs</h2>
+    <p *ngIf="isAvailable">Available</p>
+    <p *ngIf="!isAvailable">Not Available</p>
+    <ul class="content-list">
+      <li *ngFor="let content of contentList ">
+        <ul class="content-list">
+          <li *ngFor="let content of contentList">
+            <app-content-card> ></app-content-card>
+          </li>
+        </ul>
+      <li *ngFor="let content of contentList">
+        <app-content-card [content]="content"></app-content-card>
+      </li>
+    </ul>
   </div>
-  <p *ngIf="isAvailable">Available</p>
-  <p *ngIf="!isAvailable">Not Available</p>
-  <ul class="content-list">
-    <li *ngFor="let content of contentList | contentlistpipe">
-      <ul class="content-list">
-        <li *ngFor="let content of contentList">
-          <app-content-card> ></app-content-card>
-        </li>
-      </ul>
-    </li>
-  </ul>
 </section>
-//
-
-
