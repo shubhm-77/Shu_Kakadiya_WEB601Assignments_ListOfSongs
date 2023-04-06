@@ -1,20 +1,27 @@
-<div
-  ngClass="{{ content?.id === 1 ? 'content-card first' : 'content-card' }}"
-  (click)="onPress()"
-  appHoverAffect
->
-  <div class="content-img">
 
-    <img
-      *ngIf="content?.imgURL"
-      src="{{ content?.imgURL }}"
-      alt="{{ content?.title }}"
-    />
-    <img
-      *ngIf="!content?.imgURL"
-      src="https://via.placeholder.com/150"
-      alt="{{ content?.title }}"
-    />
-  </div>
+<h3>{{contentToDisplay.title}}</h3>
+<span class="displayBlock">
+        <strong class="displayBlock">Description</strong>
+  {{contentToDisplay.description}}
+    </span>
+<span class="displayBlock">
+        <strong class="displayBlock">Creator</strong>
+  {{contentToDisplay.creator}}
+    </span>
+<span class="displayBlock" *ngIf="contentToDisplay.type">
+        <strong class="displayBlock" >Type</strong>
+        <span>{{contentToDisplay?.type}}</span>
+    </span>
+<span class="displayBlock">
+        <strong class="displayBlock">Image:</strong>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRs4ZE__2Fe5irn022tGa-0kcSfl1Dr3z4Haw&usqp=CAU" alt="{{contentToDisplay.title}}" width="60" height="60" (click)="logIdTitle(contentToDisplay)"/>
+    </span>
 
-</div>
+<span class="displayBlock" *ngIf="contentToDisplay.tags">
+        <strong class="displayBlock">Tags</strong>
+        <span *ngFor="let tag of contentToDisplay.tags;let i=index" class="tag-span">
+            <span [appHoverAffect]="'tagHover'">
+                {{tag}}
+            </span> {{i==contentToDisplay.tags.length-1?'':'| '}}
+        </span>
+    </span>

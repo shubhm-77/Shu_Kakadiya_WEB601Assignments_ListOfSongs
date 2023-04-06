@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { ContentCardComponent } from './content-card/content-card.component';
 import { ContentListComponent } from './content-list/content-list.component';
-
+import { ContentTypeFilterPipe } from './content-type-filter.pipe';
 import { HoverAffectDirective } from './hover-affect.directive';
-import {ContentFilterPipe} from "./content-list/content-list.pipe";
 
 
 @NgModule({
@@ -15,11 +14,15 @@ import {ContentFilterPipe} from "./content-list/content-list.pipe";
     AppComponent,
     ContentCardComponent,
     ContentListComponent,
-    HoverAffectDirective,
-    ContentFilterPipe,
+    ContentTypeFilterPipe,
+    HoverAffectDirective
   ],
-  imports: [BrowserModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

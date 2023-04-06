@@ -1,26 +1,18 @@
-<section class="section">
-  <h2>List Of Songs</h2>
-  <div>
-    <label for="search">Search</label>
-    <input
-      type="text"
-      id="search"
-      placeholder="Search"
-      (input)="handleInput($event)"
-    />
-    <button (click)="searchContent()">Search</button>
-  </div>
-  <p *ngIf="isAvailable">Available</p>
-  <p *ngIf="!isAvailable">Not Available</p>
-  <ul class="content-list">
-    <li *ngFor="let content of contentList | contentlistpipe">
-      <ul class="content-list">
-        <li *ngFor="let content of contentList">
-          <app-content-card></app-content-card>
-        </li>
-      </ul>
-    </li>
-  </ul>
-</section>
+<div style="margin-bottom: 25px;">
+  <form [formGroup]="userTitleInputForm" (ngSubmit)="onSubmit()">
+    <label for="content-title-field">Enter title: </label>
+    <input id="content-title-field" formControlName="contentTitleField" placeholder="Content title">
+    <button type="submit">Submit</button>
+  </form>
+  <span *ngIf="displayMsgCode>-2 && userTitleInputForm.value.contentTitleField" [ngStyle]="{'color':displayMsgCode===-1?'Blue':'Green'}">
+        {{displayMsgCode===-1?'Title Does not Exist':'Title Exists'}}
+    </span>
+</div>
+<app-content-card
+  *ngFor="let content of contentListArr | contentTypeFilter:'Songs';let i = index;"
+  [ngClass]="i===0?'firstContent':'generalContent'"
+  [contentToDisplay]="content"
+  [appHoverAffect]="'contentHover'"
+></app-content-card>
 
 

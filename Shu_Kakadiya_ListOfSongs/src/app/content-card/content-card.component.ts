@@ -4,17 +4,21 @@ import { Content } from '../helper-files/content-interface';
 @Component({
   selector: 'app-content-card',
   templateUrl: './content-card.component.html',
-  styleUrls: ['./content-card.component.scss'],
+  styleUrls: ['./content-card.component.scss']
 })
-export class ContentCardComponent {
-  @Input() content: Content | undefined;
+export class ContentCardComponent{
+  [x: string]: any;
+  @Input() contentToDisplay:Content | any;
+  tag: any;
+  i: any;
 
-  constructor() {
-    console.log(this.content);
+  constructor(){
+
   }
 
-  onPress() {
-    console.log('button pressed');
-    console.log(this.content?.id, this.content?.title);
+  logIdTitle(contentInfoToLog:Content):void{
+    console.log(`ID: ${contentInfoToLog.id}`)
+    console.log(`TITLE: ${contentInfoToLog.title}`)
   }
+
 }
