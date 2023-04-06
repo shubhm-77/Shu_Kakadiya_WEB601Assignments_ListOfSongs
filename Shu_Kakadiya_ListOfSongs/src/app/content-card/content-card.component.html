@@ -4,6 +4,7 @@
   appHoverAffect
 >
   <div class="content-img">
+
     <img
       *ngIf="content?.imgURL"
       src="{{ content?.imgURL }}"
@@ -15,15 +16,5 @@
       alt="{{ content?.title }}"
     />
   </div>
-  <div class="content-card">
 
-    <h2>{{ content?.title }}</h2>
-    <h2>{{ content?.creator }}</h2>
-    <h2>{{ content?.type }}</h2>
-    <h2>{{ content?.imgURL }}</h2>
-
-    <p class="content-description">
-      {{ content?.description }}
-    </p>
-  </div>
 </div>

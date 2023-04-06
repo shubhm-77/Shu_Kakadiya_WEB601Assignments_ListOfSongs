@@ -1,6 +1,5 @@
-<!-- <app-content-list></app-content-list> -->
 <section class="section">
-  <h2>My Favorite Cricketer</h2>
+  <h2>List Of Songs</h2>
   <div>
     <label for="search">Search</label>
     <input
@@ -17,12 +16,11 @@
     <li *ngFor="let content of contentList | contentlistpipe">
       <ul class="content-list">
         <li *ngFor="let content of contentList">
-          <app-content-card> ></app-content-card>
+          <app-content-card></app-content-card>
         </li>
       </ul>
     </li>
   </ul>
 </section>
-//
 
 

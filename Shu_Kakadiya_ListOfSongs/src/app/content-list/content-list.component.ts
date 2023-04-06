@@ -1,20 +1,18 @@
 import { Component } from '@angular/core';
 import {  Input } from '@angular/core';
 import { Content } from '../helper-files/content-interface';
-import {FilterContentPipe} from '../filter-content.pipe';
+
 
 @Component({
   selector: 'app-content-list',
   templateUrl: './content-list.component.html',
-  styleUrls: ['./content-list.component.css'],
+  styleUrls: ['./content-list.component.scss'],
 })
 export class ContentListComponent{
   @Input() searchText: any;
+  public isAvailable = false;
   content: Content[] = [];
-  inputTitle: string = '';
-  titleSearchMessage: string = '';
-  available: boolean = false;
-   myContentArray: any;
+  contentList: any;
 
   constructor() {
     const content1: Content = {
@@ -81,18 +79,24 @@ export class ContentListComponent{
     this.content.push(content5);
     this.content.push(content6);
     this.content.push(content7);
+    this.isAvailable = false;
   }
 
-  search(searchText: string){
-    console.log(searchText);
-    this.myContentArray.forEach((contentItem: { title: string; }) => {
-      if(contentItem.title === searchText) {
-        console.log('Item was found');
-        return 'Item was found';
+  searchContent() {
+    console.log(this.searchText);
+
+    this.contentList.forEach((content: { title: string | any[]; }) => {
+      if (content.title.includes(this.searchText)) {
+        this.isAvailable = true;
+      } else if (this.searchText === '') {
+        this.isAvailable = false;
       } else {
-        console.log('Item was not found');
-        return 'Item was not found';
+        this.isAvailable = false;
       }
     });
+  }
+
+  handleInput(event: any) {
+    this.searchText = event.target.value;
   }
 }
