@@ -4,6 +4,7 @@
   appHoverAffect
 >
   <div class="content-img">
+
     <img
       *ngIf="content?.imgURL"
       src="{{ content?.imgURL }}"
@@ -14,16 +15,20 @@
       src="https://via.placeholder.com/150"
       alt="{{ content?.title }}"
     />
-  </div>
-  <div class="content-card">
+    <p>{{ song?.type }}</p>
+    <div ngClass="{{ song?.type }} content">
+      <div class="content-card-header">
+        <h3>{{ song?.title }}</h3>
+        <h4>{{ song?.creator }}</h4>
+        <ul class="content-tags">
+          <li class="content-tag" *ngFor="let tag of song?.tags">
+            {{ tag }}
+          </li>
+        </ul>
+      </div>
+      <p class="content-description">
+        {{ song?.description }}
+      </p>
+    </div>
 
-    <h2>{{ content?.title }}</h2>
-    <h2>{{ content?.creator }}</h2>
-    <h2>{{ content?.type }}</h2>
-    <h2>{{ content?.imgURL }}</h2>
-
-    <p class="content-description">
-      {{ content?.description }}
-    </p>
   </div>
-</div>

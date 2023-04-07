@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CreatorserviceService } from './creatorservice.service';
 
 @Component({
   selector: 'app-root',
@@ -6,7 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Par_Vandra_MyFavouriteCricketPlayer';
+  title = 'Shu_Kakadiya_ListOfSongs';
 
+  featuredcreator: any;
 
+  constructor(private CreatorserviceService: CreatorserviceService) {}
+
+  ngOnInit() {
+    this.CreatorserviceService['getcreatorById'](1).subscribe((creator: any ) => {
+      this.featuredcreator = creator ;
+    });
+
+  }
 }

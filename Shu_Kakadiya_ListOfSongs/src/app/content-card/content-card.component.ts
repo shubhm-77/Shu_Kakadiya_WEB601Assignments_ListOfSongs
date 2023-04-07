@@ -8,6 +8,7 @@ import { Content } from '../helper-files/content-interface';
 })
 export class ContentCardComponent {
   @Input() content: Content | undefined;
+  public isCurrentSelectedsong = false;
 
   constructor() {
     console.log(this.content);

@@ -26,6 +26,7 @@ export class CreateContentComponent {
       creator:'',
       imgURL: '',
       type: '',
+      tags: [],
     };
 
   }

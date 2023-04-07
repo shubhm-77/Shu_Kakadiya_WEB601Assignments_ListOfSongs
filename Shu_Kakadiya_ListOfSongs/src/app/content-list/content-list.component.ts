@@ -1,106 +1,65 @@
-import { Component } from '@angular/core';
-import {  Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Content } from '../helper-files/content-interface';
-
+import { CreatorserviceService } from '../creatorservice.service';
 
 @Component({
   selector: 'app-content-list',
   templateUrl: './content-list.component.html',
   styleUrls: ['./content-list.component.css'],
 })
-export class ContentListComponent{
-  @Input() searchText: any;
+export class ContentListComponent implements OnInit {
+  creator: Content[] = [];
+  featuredcreator: Content = {} as Content;
   public isAvailable = false;
-  content: Content[] = [];
+  public searchTerm = '';
   contentList: any;
+  creatorService: any;
+  Songs: any;
 
-  constructor() {
-    const content1: Content = {
-      id: 1,
-      title: 'Eastside',
-      description: 'Friends Keep Secrets(2018)',
-      creator: 'Benny Blanco, Halsey, Khalid',
-      //imgURL: '',
-      type: 'Pop'
-    };
-    const content2: Content = {
-      id: 2,
-      title: 'Tonight',
-      description: 'Icarus Fall(2018)',
-      creator: 'Zayn Malik',
-      //imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/2.jpg',
-      type: 'Pop'
-    };
-    const content3: Content = {
-      id: 3,
-      title: 'Perfect',
-      description: '÷Divide(2017)',
-      creator: 'ED Sheeran',
-      //imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/3.jpg',
-      type: 'Pop'
-    };
-    const content4: Content = {
-      id: 4,
-      title: 'One Million Bullets',
-      description: 'This Is Acting(2016)',
-      creator: 'Sia',
-      //imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/4.jpg',
-      type: 'Indian Film Pop, Alternative/Indie, R&B/Soul, Electropop, Pop, UK R&B, Dance Pop, Singer-Songwriter'
-    };
-    const content5: Content = {
-      id: 5,
-      title: 'Better',
-      description: 'Suncity(2018)',
-      creator: 'Khalid',
-      //imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/5.jpg',
-      type: 'R&B/Soul'
-    };
-    const content6: Content = {
-      id: 6,
-      title: 'Lovely',
-      description: 'When We All Fall Asleep, Where Do We Go?',
-      creator: 'Billie Eilish, Khalid',
-      //imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/6.jpg',
-      type: 'Pop'
-    };
-
-    const content7: Content = {
-      id: 7,
-      title: 'Infinity',
-      description: 'Feel Something(2017)',
-      creator: 'Jaymes Young',
-      //imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/7.jpg',
-      type: 'Alternative/Indie, Children\'s Music, Electronic rock'
-    };
-    this.content.push(content1);
-    this.content.push(content2);
-    this.content.push(content3);
-    this.content.push(content4);
-    this.content.push(content5);
-    this.content.push(content6);
-    this.content.push(content7);
+  constructor(private CreatorserviceService: CreatorserviceService) {
     this.isAvailable = false;
+    this.searchTerm = '';
+  }
+
+  ngOnInit(): void {
+    this.CreatorserviceService['getcreator']().subscribe((creator: Content[]) => {
+      this.creator = creator;
+    });
+  }
+
+  handleInput(event: any) {
+    this.searchTerm = event.target.value;
+  }
+
+  onContentAdded(newContent: Content) {
+
+    this.creator.push(newContent);
+
+    console.log(`Added ${newContent.title} successfully`);
+
+    console.log(this.creator);
+  }
+
+  updateContent(updatedContent: Content) {
+    this.creatorService.updateCreator(updatedContent).subscribe((updatedcreator: { id: any; }) => {
+      const index = this.creator.findIndex(
+        (creator: { id: any; }) => creator.id === updatedcreator.id
+      );
+      this.creatorService[index] = updatedcreator;
+    });
   }
 
   searchContent() {
-    console.log(this.searchText);
+    console.log(this.searchTerm);
 
-    this.contentList.forEach((content: { title: string | any[]; }) => {
-      if (content.title.includes(this.searchText)) {
+    this.contentList.forEach((creator: { title: string | string[]; }) => {
+      if (creator.title.includes(this.searchTerm)) {
         this.isAvailable = true;
-      } else if (this.searchText === '') {
+      } else if (this.searchTerm === '') {
         this.isAvailable = false;
       } else {
         this.isAvailable = false;
       }
     });
-  }
-
-  onContentAdded(newContent: Content) {
-    this.contentList.push(newContent);
-
-    console.log(`Added ${newContent.title} successfully`);
-
-    console.log(this.contentList);
   }
 }
