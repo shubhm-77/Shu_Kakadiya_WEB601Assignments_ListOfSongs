@@ -1,20 +1,22 @@
-import { Component } from '@angular/core';
-import { Input } from '@angular/core';
-import {Content} from '../helper-files/content-interface';
-import{FilterContentPipe} from "../filter-content.pipe";
+import { Component, Input } from '@angular/core';
+import { Content } from '../helper-files/content-interface';
 
 @Component({
   selector: 'app-content-card',
   templateUrl: './content-card.component.html',
-  styleUrls: ['./content-card.component.scss']
+  styleUrls: ['./content-card.component.css']
 })
-export class ContentCardComponent {
-  @Input() content: Content;
+export class ContentCardComponent{
+  @Input() contentToDisplay:Content | any;
 
   constructor(){
+
   }
 
-  logInfo(content: Content){
-    console.log('ID: ', content.id, ' Title: ', content.title);
+  logIdTitle(contentInfoToLog:Content):void{
+    console.log(`ID: ${contentInfoToLog.id}`)
+    console.log(`TITLE: ${contentInfoToLog.title}`)
   }
+
+  //totalContents = this.initContent.contentArr
 }

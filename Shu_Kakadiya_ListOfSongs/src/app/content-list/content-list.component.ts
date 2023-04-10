@@ -1,98 +1,92 @@
+import { ViewportScroller } from '@angular/common';
 import { Component } from '@angular/core';
-import {  Input } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Content } from '../helper-files/content-interface';
-import {FilterContentPipe} from '../filter-content.pipe';
 
 @Component({
   selector: 'app-content-list',
   templateUrl: './content-list.component.html',
-  styleUrls: ['./content-list.component.scss'],
+  styleUrls: ['./content-list.component.css']
 })
-export class ContentListComponent{
-  @Input() searchText: any;
-  content: Content[] = [];
-  inputTitle: string = '';
-  titleSearchMessage: string = '';
-  available: boolean = false;
-   myContentArray: any;
-
-  constructor() {
-    const content1: Content = {
-      id: 1,
-      title: 'Eastside',
-      description: 'Friends Keep Secrets(2018)',
-      creator: 'Benny Blanco, Halsey, Khalid',
-      imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/1.jpg',
-      type: 'Pop'
-    };
-    const content2: Content = {
-      id: 2,
-      title: 'Tonight',
-      description: 'Icarus Fall(2018)',
-      creator: 'Zayn Malik',
-      imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/2.jpg',
-      type: 'Pop'
-    };
-    const content3: Content = {
-      id: 3,
-      title: 'Perfect',
-      description: '÷Divide(2017)',
-      creator: 'ED Sheeran',
-      imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/3.jpg',
-      type: 'Pop'
-    };
-    const content4: Content = {
-      id: 4,
-      title: 'One Million Bullets',
-      description: 'This Is Acting(2016)',
-      creator: 'Sia',
-      imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/4.jpg',
-      type: 'Indian Film Pop, Alternative/Indie, R&B/Soul, Electropop, Pop, UK R&B, Dance Pop, Singer-Songwriter'
-    };
-    const content5: Content = {
-      id: 5,
-      title: 'Better',
-      description: 'Suncity(2018)',
-      creator: 'Khalid',
-      imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/5.jpg',
-      type: 'R&B/Soul'
-    };
-    const content6: Content = {
-      id: 6,
-      title: 'Lovely',
-      description: 'When We All Fall Asleep, Where Do We Go?',
-      creator: 'Billie Eilish, Khalid',
-      imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/6.jpg',
-      type: 'Pop'
-    };
-
-    const content7: Content = {
-      id: 7,
-      title: 'Infinity',
-      description: 'Feel Something(2017)',
-      creator: 'Jaymes Young',
-      imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/7.jpg',
-      type: 'Alternative/Indie, Children\'s Music, Electronic rock'
-    };
-    this.content.push(content1);
-    this.content.push(content2);
-    this.content.push(content3);
-    this.content.push(content4);
-    this.content.push(content5);
-    this.content.push(content6);
-    this.content.push(content7);
+export class ContentListComponent {
+  contentListArr:Content[] = [];
+  displayMsgCode:number=-2;
+  generateContent(id:number,contentArr:(string)[]){
+    return {
+      id,
+      title:contentArr[0],
+      description:contentArr[1],
+      creator:contentArr[2]
+    }
   }
-
-  search(searchText: string){
-    console.log(searchText);
-    this.myContentArray.forEach((contentItem: { title: string; }) => {
-      if(contentItem.title === searchText) {
-        console.log('Item was found');
-        return 'Item was found';
-      } else {
-        console.log('Item was not found');
-        return 'Item was not found';
-      }
+    userTitleInputForm = this.formBuilder.group({
+      contentTitleField: ''
     });
+
+    onSubmit=()=>{
+      if (!this.userTitleInputForm.controls.contentTitleField.value) {
+        return;
+      }
+      this.displayMsgCode = this.contentListArr.findIndex(content=>content.title.toLowerCase()===this.userTitleInputForm.controls.contentTitleField.value?.toLowerCase());
+      if(this.displayMsgCode>-1){
+        this.contentListArr[this.displayMsgCode].highlight = true;
+        this.scroller.scrollToAnchor(this.contentListArr[this.displayMsgCode].title);
+      }
+      setTimeout(() => {
+        this.contentListArr[this.displayMsgCode].highlight = false;
+        this.displayMsgCode = -2;
+      }, 5000);
+    }
+
+    constructor(private formBuilder: FormBuilder, private scroller: ViewportScroller){
+      this.contentListArr.push({
+        ...this.generateContent(
+          1,['Eastside','Friends Keep Secrets','Halsey, Khalid, Benny Blanco']
+        ),
+        ...{imgURL:''},
+        ...{type:'Pop'},
+        ...{tags:['2018']}
+      });
+      this.contentListArr.push({
+        ...this.generateContent(
+          2,['Tonight',`Icarus Falls`,'Zayn Malik']
+        ),
+        ...{type:'Pop'},
+        ...{imgURL:''}
+      });
+      this.contentListArr.push({
+        ...this.generateContent(
+          3,['Gods Plan','Scorpion','Drake']
+      ),
+    ...{type:'Pop music, Trap music, R&B/Soul, Pop rap, Hip-Hop/Rap'}
+    });
+      this.contentListArr.push({
+        ...this.generateContent(
+          4,['Itni Si Baat Hain','Azhar','Arijit Singh, Antara Mitra']
+        ),
+        ...{type:'Pop'},
+        ...{imgURL:''},
+        ...{tags:['2016']}
+      });
+      this.contentListArr.push({
+        ...this.generateContent(
+          5,['Teri Jhuki Nazar','Murder 3','Pritam Chakraborty, Shafqat Amanat Ali']
+        )
+      });
+      this.contentListArr.push({
+        ...this.generateContent(
+          6,['Mogal Taro Aashro',' Mogal Taro Aashro (feat. Kirtidan Gadhavi)',' Jigardan Gadhavi']
+        )
+      });
+      this.contentListArr.push({
+        ...this.generateContent(
+          7,[' Radha Sang Raas Rame Shyam','Folk','Jais Kukadiya']
+        )
+      });
+      this.contentListArr.push({
+        ...this.generateContent(
+          8,['Badnaam Kiya','Badnaam Kiya','Yasser Desai']
+        )
+      });
+    }
   }
-}
