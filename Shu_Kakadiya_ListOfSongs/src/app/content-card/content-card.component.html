@@ -1,29 +1,32 @@
-<div
-  ngClass="{{ content?.id === 1 ? 'content-card first' : 'content-card' }}"
-  (click)="onPress()"
-  appHoverAffect
+<div class="content" id="{{contentToDisplay.title}}"
+     ngClass="content-{{contentToDisplay.type?contentToDisplay.type:'no-type'}} {{contentToDisplay.highlight?'highlight':''}}"
 >
-  <div class="content-img">
-    <img
-      *ngIf="content?.imgURL"
-      src="{{ content?.imgURL }}"
-      alt="{{ content?.title }}"
-    />
-    <img
-      *ngIf="!content?.imgURL"
-      src="https://via.placeholder.com/150"
-      alt="{{ content?.title }}"
-    />
-  </div>
-  <div class="content-card">
-
-    <h2>{{ content?.title }}</h2>
-    <h2>{{ content?.creator }}</h2>
-    <h2>{{ content?.type }}</h2>
-    <h2>{{ content?.imgURL }}</h2>
-
-    <p class="content-description">
-      {{ content?.description }}
-    </p>
-  </div>
+  <h3>{{contentToDisplay.title}}</h3>
+  <span class="displayBlock">
+        <strong class="displayBlock">Description</strong>
+    {{contentToDisplay.description}}
+    </span>
+  <span class="displayBlock">
+        <strong class="displayBlock">Creator</strong>
+    {{contentToDisplay.creator}}
+    </span>
+  <span class="displayBlock" *ngIf="contentToDisplay.type">
+        <strong class="displayBlock" [appHoverAffect]="'typeHover'">Type</strong>
+        <span>{{contentToDisplay?.type}}</span>
+    </span>
+  <span class="displayBlock">
+        <strong class="displayBlock">Image:</strong>
+        <img *ngIf="contentToDisplay.imgURL; else defaultImage" src="{{contentToDisplay.imgURL}}" alt="{{contentToDisplay.title}}" width="60" height="60" (click)="logIdTitle(contentToDisplay)"/>
+    </span>
+  <ng-template #defaultImage>
+    <img src="../assets/default-content.jpg" alt="{{contentToDisplay.title}}" width="60" height="60" (click)="logIdTitle(contentToDisplay)"/>
+  </ng-template>
+  <span class="displayBlock" *ngIf="contentToDisplay.tags">
+        <strong class="displayBlock">Tags</strong>
+        <span *ngFor="let tag of contentToDisplay.tags;let i=index" class="tag-span">
+            <span [appHoverAffect]="'tagHover'">
+                {{tag}}
+            </span> {{i==contentToDisplay.tags.length-1?'':'| '}}
+        </span>
+    </span>
 </div>
