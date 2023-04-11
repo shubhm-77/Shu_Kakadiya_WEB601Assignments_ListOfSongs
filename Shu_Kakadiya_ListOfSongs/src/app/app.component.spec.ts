@@ -1,13 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import {ContentListComponent} from "./content-list/content-list.component";
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        AppComponent,
-        ContentListComponent
+        AppComponent
       ],
     }).compileComponents();
   });
@@ -18,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'Par_Vandra_MyFavouriteCricketPlayer'`, () => {
+  it(`should have as title 'Shu_Kakadiya_ListOfSongs'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('Par_Vandra_MyFavouriteCricketPlayer');
+    expect(app.title).toEqual('Shu_Kakadiya_ListOfSongs');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('Par_Vandra_MyFavouriteCricketPlayer app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('Shu_Kakadiya_ListOfSongs app is running!');
   });
 });

@@ -1,15 +1,15 @@
 {
   "name": "shu-kakadiya-list-of-songs",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "generatecomponent": "ng g c",
+    "generatepipe": "ng g pipe",
+    "generatedirective": "ng g directive",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "component": "npm run-script generatecomponent",
-    "pipe": "npm run-script generate",
-    "directive": "npm run-script generatedirective"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
@@ -21,6 +21,8 @@
     "@angular/platform-browser": "^15.1.0",
     "@angular/platform-browser-dynamic": "^15.1.0",
     "@angular/router": "^15.1.0",
+    "bootstrap": "^5.2.3",
+    "bootstrap-icons": "^1.10.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"

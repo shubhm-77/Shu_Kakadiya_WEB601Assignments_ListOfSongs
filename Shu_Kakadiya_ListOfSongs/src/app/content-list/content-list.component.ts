@@ -1,106 +1,57 @@
+import { ViewportScroller } from '@angular/common';
 import { Component } from '@angular/core';
-import {  Input } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Content } from '../helper-files/content-interface';
-
+import { CreatorServiceService } from '../creator-service.service';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-content-list',
   templateUrl: './content-list.component.html',
-  styleUrls: ['./content-list.component.css'],
+  styleUrls: ['./content-list.component.css']
 })
-export class ContentListComponent{
-  @Input() searchText: any;
-  public isAvailable = false;
-  content: Content[] = [];
-  contentList: any;
-
-  constructor() {
-    const content1: Content = {
-      id: 1,
-      title: 'Eastside',
-      description: 'Friends Keep Secrets(2018)',
-      creator: 'Benny Blanco, Halsey, Khalid',
-      //imgURL: '',
-      type: 'Pop'
-    };
-    const content2: Content = {
-      id: 2,
-      title: 'Tonight',
-      description: 'Icarus Fall(2018)',
-      creator: 'Zayn Malik',
-      //imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/2.jpg',
-      type: 'Pop'
-    };
-    const content3: Content = {
-      id: 3,
-      title: 'Perfect',
-      description: '÷Divide(2017)',
-      creator: 'ED Sheeran',
-      //imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/3.jpg',
-      type: 'Pop'
-    };
-    const content4: Content = {
-      id: 4,
-      title: 'One Million Bullets',
-      description: 'This Is Acting(2016)',
-      creator: 'Sia',
-      //imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/4.jpg',
-      type: 'Indian Film Pop, Alternative/Indie, R&B/Soul, Electropop, Pop, UK R&B, Dance Pop, Singer-Songwriter'
-    };
-    const content5: Content = {
-      id: 5,
-      title: 'Better',
-      description: 'Suncity(2018)',
-      creator: 'Khalid',
-      //imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/5.jpg',
-      type: 'R&B/Soul'
-    };
-    const content6: Content = {
-      id: 6,
-      title: 'Lovely',
-      description: 'When We All Fall Asleep, Where Do We Go?',
-      creator: 'Billie Eilish, Khalid',
-      //imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/6.jpg',
-      type: 'Pop'
-    };
-
-    const content7: Content = {
-      id: 7,
-      title: 'Infinity',
-      description: 'Feel Something(2017)',
-      creator: 'Jaymes Young',
-      //imgURL: 'Shu_Kakadiya_ListOfSongs/src/assets/7.jpg',
-      type: 'Alternative/Indie, Children\'s Music, Electronic rock'
-    };
-    this.content.push(content1);
-    this.content.push(content2);
-    this.content.push(content3);
-    this.content.push(content4);
-    this.content.push(content5);
-    this.content.push(content6);
-    this.content.push(content7);
-    this.isAvailable = false;
-  }
-
-  searchContent() {
-    console.log(this.searchText);
-
-    this.contentList.forEach((content: { title: string | any[]; }) => {
-      if (content.title.includes(this.searchText)) {
-        this.isAvailable = true;
-      } else if (this.searchText === '') {
-        this.isAvailable = false;
-      } else {
-        this.isAvailable = false;
+export class ContentListComponent {
+  contentListArr:Content[] = [];
+  retrievedContent:Content|any;
+  displayMsgCode:number=-2;
+  userTitleInputForm = this.formBuilder.group({
+    contentTitleField: 0
+  });
+  onSubmit=(id?:number)=>{
+    this.crtrService.getContentAtId(id?id:this.userTitleInputForm.controls.contentTitleField.value).subscribe((content)=>{
+      this.msgService.clear();
+      if (content) {
+        this.retrievedContent={...content};
+        this.retrievedContent.highlight = true;
+        this.msgService.add({status:1,msg:`Content Item at id: ${id?id:this.userTitleInputForm.controls.contentTitleField.value}`});
+      } else{
+        this.retrievedContent='';
+        this.msgService.add({status:0,msg:'There was an error getting content!!'});
       }
-    });
+
+    })
+
   }
 
-  onContentAdded(newContent: Content) {
-    this.contentList.push(newContent);
+  constructor(
+    private formBuilder: FormBuilder,
+    private crtrService: CreatorServiceService,
+    private msgService: MessageService
+  ){
 
-    console.log(`Added ${newContent.title} successfully`);
+  }
+  ngOnInit() {
+    this.crtrService.getContent().subscribe((content)=>{
+      this.contentListArr = content;
+      this.msgService.add({status:1,msg:'Content array loaded!'});
+      this.onSubmit(4);
+      setTimeout(() => {
+        this.msgService.clear();
+      }, 2000);
+    })
+  }
 
-    console.log(this.contentList);
+  addNewContentToList($event: any) {
+    
   }
 }
