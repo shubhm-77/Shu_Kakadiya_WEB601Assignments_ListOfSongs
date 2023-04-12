@@ -1,15 +1,15 @@
 {
-  "name": "shu-kakadiya-list-of-songs",
+  "name": "Shu_Kakadiya_ListOfSongs",
   "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "generatecomponent": "ng g c",
+    "generatepipe": "ng g pipe",
+    "generatedirective": "ng g directive",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "component": "npm run-script generatecomponent",
-    "pipe": "npm run-script generate",
-    "directive": "npm run-script generatedirective"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {

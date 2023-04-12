@@ -1,34 +1,29 @@
 import { Content } from "./content-interface";
+
 export class ContentList {
-  private _items: Content [];
-  constructor() {
-    this._items = [];
-  }
-  getItems(): Content [] {
-    return this._items;
-  }
-  addFunction(contentItem: Content) {
-    return this._items.push(contentItem);
-  }
-  getLength(){
-    return this._items.length;
+  private _contentsArr: Content[];
+  constructor(contentArr:[]){
+    this._contentsArr = contentArr;
   }
 
-  printIndex(index: number): string {
-    let readerFriendlyHtml = `<div>`;
-    readerFriendlyHtml += `<p>` + this._items[index].title + `<p>`;
-    readerFriendlyHtml += `<p>` + this._items[index].description + `<p>`;
-    readerFriendlyHtml += `<p>` + this._items[index].type + `<p>`;
-    readerFriendlyHtml += `<p>` + this._items[index].creator + `<p>`;
-    readerFriendlyHtml += `<img src ="` + this._items[index].imgURL + `">`;
-    readerFriendlyHtml += `</div>`;
-    return readerFriendlyHtml;
-    readerFriendlyHtml += `<p>` + this._items[index].title + `<p>`;
-    readerFriendlyHtml += `<p>` + this._items[index].description + `<p>`;
-    readerFriendlyHtml += `<p>` + this._items[index].type + `<p>`;
-    readerFriendlyHtml += `<p>` + this._items[index].creator + `<p>`;
-    readerFriendlyHtml += `<img src ="` + this._items[index].imgURL + `">`;
-    readerFriendlyHtml += `</div>`;
-    return readerFriendlyHtml;
+  get contentArr():Content[] {
+    return this._contentsArr;
   }
+
+  addContentToPrivateArr(contentToAdd:Content):void{
+    this._contentsArr.push(contentToAdd);
+  }
+
+  totalContents(): number{
+    return this._contentsArr.length;
+  }
+
+  getContentAtSpecificIndex(indexToUse: number):Content{
+    if(this._contentsArr[indexToUse]){
+      return this._contentsArr[indexToUse];
+    }else{
+      throw new Error("Index out of array");
+    }
+  }
+
 }
