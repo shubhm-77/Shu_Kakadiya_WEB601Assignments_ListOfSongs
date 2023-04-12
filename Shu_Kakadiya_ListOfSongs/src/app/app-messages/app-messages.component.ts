@@ -3,11 +3,11 @@ import { Component } from '@angular/core';
 import { MessagesService } from '../message.service';
 
 @Component({
-  selector: 'app-messages',
-  templateUrl: './messages.component.html',
-  styleUrls: ['./messages.component.scss']
+  selector: 'app-app-messages',
+  templateUrl: './app-messages.component.html',
+  styleUrls: ['./app-messages.component.css']
 })
-export class MessagesComponent {
+export class AppMessagesComponent {
   constructor(public messagesService: MessagesService) {}
 
   ngOnInit() {}

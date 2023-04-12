@@ -1,19 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-// @ts-ignore
-import { CreatecontentComponent } from './createcontent.component';
+import { CreateContentComponent } from './create-content.component';
 
-describe('CreatecontentComponent', () => {
-  let component: CreatecontentComponent;
-  let fixture: ComponentFixture<CreatecontentComponent>;
+describe('CreateContentComponent', () => {
+  let component: CreateContentComponent;
+  let fixture: ComponentFixture<CreateContentComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreatecontentComponent ]
+      declarations: [ CreateContentComponent ]
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(CreatecontentComponent);
+    fixture = TestBed.createComponent(CreateContentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

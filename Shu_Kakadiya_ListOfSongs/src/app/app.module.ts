@@ -1,48 +1,42 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 // @ts-ignore
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './services/in-memory-data.service';
 
-// @ts-ignore
-import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from './app.component';
 import { ContentCardComponent } from './content-card/content-card.component';
 import { ContentListComponent } from './content-list/content-list.component';
-// @ts-ignore
-import { ContentFilterPipe } from './content-list/content-filter.pipe';
+import { ContentTypeFilterPipe } from './content-type-filter.pipe';
 import { HoverAffectDirective } from './hover-affect.directive';
-import { MessagesComponent } from './messages/messages.component';
-// @ts-ignore
-import { CreateContentComponent } from './createcontent/createcontent.component';
-import { CreatorserviceService } from './creatorservice.service';
-import { FormsModule } from '@angular/forms';
-// @ts-ignore
-import { ModifyContentComponentComponent } from './modify-content-component/modify-content-component.component.html';
+import { InMemoryDataService } from './services/in-memory-data.service';
+import { AppMessagesComponent } from './app-messages/app-messages.component';
+import { ModifyContentComponentComponent } from './modify-content-component/modify-content-component.component';
+import { CreateContentComponent } from './create-content/create-content.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ContentCardComponent,
     ContentListComponent,
-    ContentFilterPipe,
+    ContentTypeFilterPipe,
     HoverAffectDirective,
-    MessagesComponent,
+    AppMessagesComponent,
     CreateContentComponent,
-    ModifyContentComponentComponent,
+    ModifyContentComponentComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     FormsModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
       dataEncapsulation: false,
+      delay: 1000,
     }),
+    ReactiveFormsModule
   ],
-
-  providers: [CreatorserviceService],
-  bootstrap: [AppComponent],
+  providers: [],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
