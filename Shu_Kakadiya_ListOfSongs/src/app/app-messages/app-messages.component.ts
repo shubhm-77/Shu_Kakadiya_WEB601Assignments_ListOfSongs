@@ -8,6 +8,7 @@ import { MessagesService } from '../message.service';
   styleUrls: ['./app-messages.component.css']
 })
 export class AppMessagesComponent {
+  msgService: any;
   constructor(public messagesService: MessagesService) {}
 
   ngOnInit() {}

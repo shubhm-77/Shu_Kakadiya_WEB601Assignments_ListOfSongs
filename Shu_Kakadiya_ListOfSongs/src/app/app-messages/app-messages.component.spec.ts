@@ -1,15 +1,26 @@
-import { Component } from '@angular/core';
-import { MessageService } from '../message.sevice';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-@Component({
-  selector: 'app-app-messages',
-  templateUrl: './app-messages.component.html',
-  styleUrls: ['./app-messages.component.css']
-})
-export class AppMessagesComponent {
+import { AppMessagesComponent } from './app-messages.component';
 
-  constructor(public msgService:MessageService){
+describe('AppMessagesComponent', () => {
+  let component: AppMessagesComponent;
+  let fixture: ComponentFixture<AppMessagesComponent>;
 
-  }
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ AppMessagesComponent ]
+    })
+      .compileComponents();
 
-}
+    fixture = TestBed.createComponent(AppMessagesComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+
+
+

@@ -18,11 +18,11 @@ import { CreateContentComponent } from './create-content/create-content.componen
 @NgModule({
   declarations: [
     AppComponent,
+    AppMessagesComponent,
     ContentCardComponent,
     ContentListComponent,
     ContentTypeFilterPipe,
     HoverAffectDirective,
-    AppMessagesComponent,
     CreateContentComponent,
     ModifyContentComponentComponent
   ],
