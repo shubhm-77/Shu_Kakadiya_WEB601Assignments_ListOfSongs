@@ -1,4 +1,4 @@
-import { ViewportScroller } from '@angular/common';
+
 import { Component, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Content } from '../helper-files/content-interface';

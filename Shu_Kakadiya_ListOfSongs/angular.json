@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Shu_Kakadiya_ListOfSongs",
+            "outputPath": "dist/shu-kakadiya-list-of-songs",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -25,6 +25,7 @@
               "src/assets"
             ],
             "styles": [
+
               "src/styles.css",
               "src/my-theme.scss"
             ],

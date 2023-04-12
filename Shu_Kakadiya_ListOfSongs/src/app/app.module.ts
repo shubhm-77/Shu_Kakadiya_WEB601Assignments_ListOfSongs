@@ -31,9 +31,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
     ContentListComponent,
     ContentTypeFilterPipe,
     HoverAffectDirective,
-    AppMessagesComponent,
     ModifyContentComponentComponent,
-    ModifyContentComponentDialog
+    ModifyContentComponentDialog,
+    AppMessagesComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +53,6 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatExpansionModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, AppMessagesComponent]
 })
 export class AppModule { }
