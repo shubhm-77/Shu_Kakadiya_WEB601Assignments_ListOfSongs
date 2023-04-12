@@ -1,65 +1,63 @@
-import { Component, OnInit } from '@angular/core';
+import { ViewportScroller } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Content } from '../helper-files/content-interface';
-import { CreatorserviceService } from '../creatorservice.service';
+import { CreatorServiceService } from '../creatorservice.service';
+import { MessageService } from '../message.sevice';
 
 @Component({
   selector: 'app-content-list',
   templateUrl: './content-list.component.html',
-  styleUrls: ['./content-list.component.css'],
+  styleUrls: ['./content-list.component.css']
 })
-export class ContentListComponent implements OnInit {
-  creator: Content[] = [];
-  featuredcreator: Content = {} as Content;
-  public isAvailable = false;
-  public searchTerm = '';
-  contentList: any;
-  creatorService: any;
-  Songs: any;
+export class ContentListComponent {
+  @Input() newContentEvent: any;
+  retrievedContent:Content|any;
+  displayMsgCode:number=-2;
 
-  constructor(private CreatorserviceService: CreatorserviceService) {
-    this.isAvailable = false;
-    this.searchTerm = '';
-  }
+  userTitleInputForm = this.formBuilder.group({
+    contentTitleField: 0
+  });
 
-  ngOnInit(): void {
-    this.CreatorserviceService['getcreator']().subscribe((creator: Content[]) => {
-      this.creator = creator;
-    });
-  }
-
-  handleInput(event: any) {
-    this.searchTerm = event.target.value;
-  }
-
-  onContentAdded(newContent: Content) {
-
-    this.creator.push(newContent);
-
-    console.log(`Added ${newContent.title} successfully`);
-
-    console.log(this.creator);
-  }
-
-  updateContent(updatedContent: Content) {
-    this.creatorService.updateCreator(updatedContent).subscribe((updatedcreator: { id: any; }) => {
-      const index = this.creator.findIndex(
-        (creator: { id: any; }) => creator.id === updatedcreator.id
-      );
-      this.creatorService[index] = updatedcreator;
-    });
-  }
-
-  searchContent() {
-    console.log(this.searchTerm);
-
-    this.contentList.forEach((creator: { title: string | string[]; }) => {
-      if (creator.title.includes(this.searchTerm)) {
-        this.isAvailable = true;
-      } else if (this.searchTerm === '') {
-        this.isAvailable = false;
-      } else {
-        this.isAvailable = false;
+  onSubmit=(id?:number)=>{
+    // @ts-ignore
+    this.crtrService.getContentAtId(id?id:this.userTitleInputForm.controls.contentTitleField.value).subscribe((content)=>{
+      this.msgService.clear();
+      if (content) {
+        this.retrievedContent={...content};
+        this.retrievedContent.highlight = true;
+        this.msgService.add({status:1,msg:`Content Item at id: ${id?id:this.userTitleInputForm.controls.contentTitleField.value}`});
+      } else{
+        this.retrievedContent='';
+        this.msgService.add({status:0,msg:'There was an error getting content!!'});
       }
-    });
+
+    })
+
+  }
+
+  addNewContentToList(event:Content){
+    this.crtrService.sharedContent.push(event);
+    this.crtrService.sharedContent = [...this.crtrService.sharedContent];
+  }
+
+  constructor(
+    private formBuilder: FormBuilder,
+    public crtrService: CreatorServiceService,
+    private msgService: MessageService
+  ){
+
+  }
+
+  ngOnInit() {
+    // @ts-ignore
+    this.crtrService.getContent().subscribe((content)=>{
+      this.crtrService.sharedContent = content;
+      this.msgService.add({status:1,msg:'Content array loaded!'});
+      this.onSubmit(4);
+      setTimeout(() => {
+        this.msgService.clear();
+      }, 2000);
+    })
   }
 }

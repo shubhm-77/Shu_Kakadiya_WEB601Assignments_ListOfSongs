@@ -1,49 +1,122 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CreatorService } from '../creator.service';
+import { Component, EventEmitter, Output, Input, Inject, Optional } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+// @ts-ignore
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Content } from '../helper-files/content-interface';
+import { CreatorserviceService } from '../creatorservice.service';
+import { MessageService } from '../message.sevice';
 
 @Component({
-  selector: 'app-create-content',
-  templateUrl: './create-content.component.html',
-  styleUrls: ['./create-content.component.scss']
+  selector: 'app-modify-content-component',
+  templateUrl: 'modify-content-component.component.html',
+  styleUrls: ['./modify-content-component.component.css']
 })
 export class ModifyContentComponentComponent {
-  @Output() updatedContentAdded = new EventEmitter<Content>();
-  @Input() creator: Content[] = [];
-  @Input() currentContent: Content | undefined;
-  currentcreator: Content[] | undefined;
+  @Output() newContentEvent: any = new EventEmitter<any>();
+  @Input() buttonAction: string = 'Add';
+  @Input() contentToUpdate: Content | any;
+  newContentItem:Content | any;
+  formSubmitted: Boolean = false;
+  formSuccess: Boolean = false;
 
-  constructor() {}
+  exitingContent: Content | null = null;
+  constructor(
+    private crtrService: CreatorserviceService,
+    private msgService: MessageService,
+    public dialog: MatDialog
+  ){}
 
-  updatedContent: Content = {
-    id: 0,
-    title: '',
-    description: '',
-    creator:'',
-    imgURL: '',
-    type: '',
-    tags: [],
-  };
-  setCurrentMovie(id: number) {
-    console.log('click');
-    const movie = this.creator.find((creator) =>creator.id === id);
-    if (CreatorService) {
-      this.currentcreator = this.creator;
+  openDialog(action: string, data: any): void {
+    data.action = action;
+    const dialogRef = this.dialog.open(ModifyContentComponentDialog, {
+      width: '500px',
+      data
+    });
+
+    dialogRef.afterClosed().subscribe(async (result) => {
+      await this.onCreateNewContentSubmit(result.event,result.data);
+    })
+  }
+
+
+  emitEventAndResetForm(isEdit:Boolean,content:Content){
+    this.formSuccess = true;
+    this.newContentEvent.emit(content);
+    this.formSubmitted = false;
+    this.exitingContent = null;
+    this.msgService.add({status:1,msg:isEdit?'Updated Content Successfully!!':'Added Content Successfully!!'});
+    setTimeout(() => {
+      this.msgService.clear();
+    }, 2000);
+  }
+
+  async onCreateNewContentSubmit(action:string,data:Content) {
+    // Following is form validation
+    this.newContentItem = data;
+    try {
+      if (action=='Update') {
+        const contentToPut = this.newContentItem;
+        this.crtrService.putContent(contentToPut).subscribe((content)=>{
+          this.emitEventAndResetForm(true,contentToPut);
+        })
+      } else {
+        // Delete id so that new id gets assigned
+        delete this.newContentItem.id;
+        this.crtrService.postContent(this.newContentItem).subscribe((content)=>{
+          this.emitEventAndResetForm(false,content);
+        })
+      }
+    } catch (error) {
+      this.formSubmitted = true;
+      this.formSuccess = false;
+      this.msgService.add({status:0,msg:'There was error adding/updating Content'});
     }
   }
-  addContent() {
-    const clonedContent = Object.assign({}, this.updatedContent);
-    clonedContent.id = Math.floor(Math.random() * 1000);
-    this.updatedContentAdded.emit(clonedContent);
-    this.updatedContent = {
-      id: 1,
-      title: '',
-      description: '',
-      creator:'',
-      imgURL: '',
-      type: '',
-      tags: [],
-    };
+}
 
+@Component({
+  selector: 'modify-content-component-dialog',
+  templateUrl: 'modify-content-component-dialogue.html',
+  styleUrls: ['./modify-content-component.component.css']
+})
+export class ModifyContentComponentDialog {
+  action:string='';
+  local_data:any;
+  constructor(
+    public dialogRef: MatDialogRef<ModifyContentComponentDialog>,
+    private formBuilder: FormBuilder,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: Content
+  ) {
+    this.local_data = {...data};
+    this.action = this.local_data.action;
+    dialogRef.disableClose = true;
+    if(this.action == 'Update'){
+      this.createNewContentForm.patchValue({
+        id: data.id,
+        title: data.title,
+        description:  data.description,
+        creator: data.creator,
+        type: data.type
+      });
+    }
+  }
+
+  createNewContentForm = this.formBuilder.group({
+    id: [{value:0,disabled:true}],
+    title: ['', Validators.required],
+    description: ['', Validators.required],
+    creator: ['', Validators.required],
+    type: ''
+  });
+
+  doAction(){
+    if (this.createNewContentForm.status.toLowerCase() === 'valid') {
+      this.dialogRef.close({event:this.action,data:{...this.local_data, ...this.createNewContentForm.getRawValue()}});
+    }
+
+  }
+
+  closeDialog(){
+    this.dialogRef.close({event:'Cancel'});
   }
 }

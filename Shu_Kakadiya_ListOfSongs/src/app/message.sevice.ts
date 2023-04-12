@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
+import { MsgObj } from './helper-files/msg-service-interface';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class MessagesService {
-  messages: string[] = [];
+export class MessageService {
 
-  add(message: string) {
+  constructor() { }
+
+  messages: MsgObj[] | any = [];
+
+  add(message: MsgObj) {
     this.messages.push(message);
   }
 

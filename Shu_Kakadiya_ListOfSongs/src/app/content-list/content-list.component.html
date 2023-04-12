@@ -1,30 +1,58 @@
-<section class="section">
-  <h2>List Of Songs</h2>
+<div style="margin-bottom: 25px;">
+<app-modify-content-component (newContentEvent)="addNewContentToList($event)" buttonAction="Add" [contentToUpdate]="{}"></app-modify-content-component>
 
-  <app-create-content
-    (contentAdded)="onContentAdded($event)"
-  ></app-create-content>
-  <app-modify-content-component
-    [currentContent]=""
-    [Songs]="Songs"
-  ></app-modify-content-component>
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Fetch Content
+      </mat-panel-title>
+      <mat-panel-description>
+        Fetch Content Using Content ID
+      </mat-panel-description>
+    </mat-expansion-panel-header>
 
-  <div>
-    <label for="search">Search</label>
-    <input
-      type="text"
-      id="search"
-      placeholder="Search"
-      (input)="handleInput($event)"
-    />
-    <button (click)="searchContent()">Search</button>
-  </div>
-  <p *ngIf="isAvailable">Available</p>
-  <p *ngIf="!isAvailable">Not Available</p>
-  <app-content-card class="featured" [creator]="featuredcreator"></app-content-card>
-  <ul class="content-list">
-    <li *ngFor="let creator of creator">
-      <app-content-card [creator]="creator"></app-content-card>
-    </li>
-  </ul>
-</section>
+    <form [formGroup]="userTitleInputForm" (ngSubmit)="onSubmit()">
+      <mat-form-field class="full-width">
+        <mat-label>Enter Content Id:</mat-label>
+        <input id="content-title-field" matInput type="number" formControlName="contentTitleField" placeholder="Content title">
+      </mat-form-field>
+      <button type="submit"  mat-flat-button color="primary">Submit</button>
+    </form>
+    <span *ngIf="displayMsgCode>-2 && userTitleInputForm.value.contentTitleField" [ngStyle]="{'color':displayMsgCode===-1?'Red':'Green'}">
+                {{displayMsgCode===-1?'Title Does not Exist':'Title Exists'}}
+            </span>
+  </mat-expansion-panel>
+</mat-accordion>
+</div>
+<app-content-card *ngIf="retrievedContent"
+                  [contentToDisplay]="retrievedContent"
+></app-content-card>
+<mat-divider style="margin:10px"></mat-divider>
+<app-content-card
+  *ngFor="let content of crtrService.sharedContent | contentTypeFilter:'Collaborate';let i = index;"
+  [ngClass]="i===0?'firstContent':'generalContent'"
+  [contentToDisplay]="content"
+  [appHoverAffect]="'contentHover'"
+></app-content-card>
+<mat-divider style="margin:10px"></mat-divider>
+<app-content-card
+  *ngFor="let content of crtrService.sharedContent | contentTypeFilter:'Singles';let i = index;"
+  [ngClass]="i===0?'firstContent':'generalContent'"
+  [contentToDisplay]="content"
+  [appHoverAffect]="'contentHover'"
+></app-content-card>
+<mat-divider style="margin:10px"></mat-divider>
+<app-content-card
+  *ngFor="let content of (crtrService.sharedContent | contentTypeFilter:'Romantic');let i = index;"
+  [ngClass]="i===0?'firstContent':'generalContent'"
+  [contentToDisplay]="content"
+  [appHoverAffect]="'contentHover'"
+></app-content-card>
+<mat-divider style="margin:10px"></mat-divider>
+<app-content-card
+  *ngFor="let content of (crtrService.sharedContent | contentTypeFilter:'');let i = index;"
+  [ngClass]="i===0?'firstContent':'generalContent'"
+  [contentToDisplay]="content"
+  [appHoverAffect]="'contentHover'"
+></app-content-card>

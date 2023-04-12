@@ -1,21 +1,29 @@
-import { Component, Input, Pipe, PipeTransform } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Content } from '../helper-files/content-interface';
+import { CreatorServiceService } from '../creatorservice.service';
 
 @Component({
   selector: 'app-content-card',
   templateUrl: './content-card.component.html',
-  styleUrls: ['./content-card.component.scss'],
+  styleUrls: ['./content-card.component.css']
 })
-export class ContentCardComponent {
-  @Input() content: Content | undefined;
-  public isCurrentSelectedsong = false;
+export class ContentCardComponent{
+  @Input() contentToDisplay:Content | any;
 
-  constructor() {
-    console.log(this.content);
+  constructor(private crtrService: CreatorServiceService){
+
   }
 
-  onPress() {
-    console.log('button pressed');
-    console.log(this.content?.id, this.content?.title);
+  logIdTitle(contentInfoToLog:Content):void{
+    console.log(`ID: ${contentInfoToLog.id}`)
+    console.log(`TITLE: ${contentInfoToLog.title}`)
+  }
+
+  addNewContentToList(event:Content){
+    const contentIndxToUpdate = this.crtrService.sharedContent.findIndex((content: { id: number | null; })=>content.id==event.id);
+    if (contentIndxToUpdate > -1) {
+      this.crtrService.sharedContent[contentIndxToUpdate] = event;
+      this.crtrService.sharedContent = [...this.crtrService.sharedContent];
+    }
   }
 }
