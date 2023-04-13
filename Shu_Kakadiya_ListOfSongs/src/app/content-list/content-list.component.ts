@@ -2,7 +2,7 @@ import { ViewportScroller } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Content } from '../helper-files/content-interface';
-import { CreatorServiceService } from '../creatorservice.service';
+import { EntertainmentServiceService } from '../entertainment-service.service';
 import { MessageService } from '../message.sevice';
 
 @Component({
@@ -20,8 +20,7 @@ export class ContentListComponent {
   });
 
   onSubmit=(id?:number)=>{
-    // @ts-ignore
-    this.crtrSrevice.getContentAtId(id?id:this.userTitleInputForm.controls.contentTitleField.value).subscribe((content)=>{
+    this.entrnService.getContentAtId(id?id:this.userTitleInputForm.controls.contentTitleField.value).subscribe((content)=>{
       this.msgService.clear();
       if (content) {
         this.retrievedContent={...content};
@@ -44,15 +43,14 @@ export class ContentListComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private crtrSrevice: CreatorServiceService,
+    private entrnService: EntertainmentServiceService,
     private msgService: MessageService
   ){
 
   }
 
   ngOnInit() {
-    // @ts-ignore
-    this.crtrSrevice.getContent().subscribe((content)=>{
+    this.entrnService.getContent().subscribe((content)=>{
       this.contentListArr = content;
       this.msgService.add({status:1,msg:'Content array loaded!'});
       this.onSubmit(4);

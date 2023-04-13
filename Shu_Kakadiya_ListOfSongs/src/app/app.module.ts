@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-// @ts-ignore
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { AppComponent } from './app.component';
@@ -13,17 +12,16 @@ import { HoverAffectDirective } from './hover-affect.directive';
 import { InMemoryDataService } from './services/in-memory-data.service';
 import { AppMessagesComponent } from './app-messages/app-messages.component';
 import { ModifyContentComponentComponent } from './modify-content-component/modify-content-component.component';
-import { CreateContentComponent } from './create-content/create-content.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    AppMessagesComponent,
     ContentCardComponent,
     ContentListComponent,
     ContentTypeFilterPipe,
     HoverAffectDirective,
-    CreateContentComponent,
+    AppMessagesComponent,
     ModifyContentComponentComponent
   ],
   imports: [

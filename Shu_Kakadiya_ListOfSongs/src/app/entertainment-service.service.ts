@@ -2,10 +2,12 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of, throwError } from 'rxjs';
 import { Content } from './helper-files/content-interface';
+
 @Injectable({
   providedIn: 'root'
 })
-export class CreatorserviceService {
+export class EntertainmentServiceService {
+
   conentUrl = 'api/content/';
   constructor(private http:HttpClient) { }
 
@@ -29,7 +31,4 @@ export class CreatorserviceService {
   putContent(content: Content): Observable<Content>{
     return this.http.put<Content>(this.conentUrl + content.id, content);
   }
-}
-
-export class CreatorServiceService {
 }

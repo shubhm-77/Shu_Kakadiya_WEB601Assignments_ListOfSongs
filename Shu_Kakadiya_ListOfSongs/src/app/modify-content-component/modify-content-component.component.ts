@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Content } from '../helper-files/content-interface';
-import { CreatorserviceService } from '../creatorservice.service';
+import { EntertainmentServiceService } from '../entertainment-service.service';
 import { MessageService } from '../message.sevice';
 
 @Component({
@@ -18,7 +18,7 @@ export class ModifyContentComponentComponent {
   exitingContent: Content | null = null;
   constructor(
     private formBuilder: FormBuilder,
-    private crtrService: CreatorserviceService,
+    private entrnService: EntertainmentServiceService,
     private msgService: MessageService
   ){}
   createNewContentForm = this.formBuilder.group({
@@ -30,7 +30,7 @@ export class ModifyContentComponentComponent {
   });
 
   populateContent(id:any) {
-    this.crtrService.getContentAtId(id.value).subscribe(content=>{
+    this.entrnService.getContentAtId(id.value).subscribe(content=>{
       this.exitingContent = content;
       if (content) {
         this.createNewContentForm.patchValue({
@@ -63,11 +63,11 @@ export class ModifyContentComponentComponent {
       try {
         if (this.newContentItem.id && this.exitingContent) {
           const contentToPut = {...this.exitingContent,...this.newContentItem};
-          this.crtrService.putContent(contentToPut).subscribe((content)=>{
+          this.entrnService.putContent(contentToPut).subscribe((content)=>{
             this.emitEventAndResetForm(true,contentToPut);
           })
         } else {
-          this.crtrService.postContent(this.newContentItem).subscribe((content)=>{
+          this.entrnService.postContent(this.newContentItem).subscribe((content)=>{
             this.emitEventAndResetForm(false,content);
           })
         }
