@@ -21,7 +21,7 @@
             <img *ngIf="contentToDisplay.imgURL; else defaultImage" src="{{contentToDisplay.imgURL}}" alt="{{contentToDisplay.title}}" width="60" height="60" (click)="logIdTitle(contentToDisplay)"/>
         </span>
     <ng-template #defaultImage>
-      <img src="../assets/default-content.jpg" mat-card-image alt="{{contentToDisplay.title}}" width="60" height="60" (click)="logIdTitle(contentToDisplay)"/>
+      <img src="./assets/default-content.png" mat-card-image alt="{{contentToDisplay.title}}" width="60" height="60" (click)="logIdTitle(contentToDisplay)"/>
     </ng-template>
     <span class="displayBlock" *ngIf="contentToDisplay.tags">
             <strong class="displayBlock">Tags</strong>

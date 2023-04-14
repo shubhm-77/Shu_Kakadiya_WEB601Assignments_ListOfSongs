@@ -1,14 +1,13 @@
 import { Component, EventEmitter, Output, Input, Inject, Optional } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-// @ts-ignore
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Content } from '../helper-files/content-interface';
-import { CreatorserviceService } from '../creatorservice.service';
+import { EntertainmentServiceService } from '../entertainment-service.service';
 import { MessageService } from '../message.sevice';
 
 @Component({
   selector: 'app-modify-content-component',
-  templateUrl: 'modify-content-component.component.html',
+  templateUrl: './modify-content-component.component.html',
   styleUrls: ['./modify-content-component.component.css']
 })
 export class ModifyContentComponentComponent {
@@ -21,7 +20,7 @@ export class ModifyContentComponentComponent {
 
   exitingContent: Content | null = null;
   constructor(
-    private crtrService: CreatorserviceService,
+    private entrnService: EntertainmentServiceService,
     private msgService: MessageService,
     public dialog: MatDialog
   ){}
@@ -56,13 +55,13 @@ export class ModifyContentComponentComponent {
     try {
       if (action=='Update') {
         const contentToPut = this.newContentItem;
-        this.crtrService.putContent(contentToPut).subscribe((content)=>{
+        this.entrnService.putContent(contentToPut).subscribe((content)=>{
           this.emitEventAndResetForm(true,contentToPut);
         })
       } else {
         // Delete id so that new id gets assigned
         delete this.newContentItem.id;
-        this.crtrService.postContent(this.newContentItem).subscribe((content)=>{
+        this.entrnService.postContent(this.newContentItem).subscribe((content)=>{
           this.emitEventAndResetForm(false,content);
         })
       }

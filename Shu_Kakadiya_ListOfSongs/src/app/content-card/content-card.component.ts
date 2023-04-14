@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Content } from '../helper-files/content-interface';
-import { CreatorServiceService } from '../creatorservice.service';
+import { EntertainmentServiceService } from '../entertainment-service.service';
 
 @Component({
   selector: 'app-content-card',
@@ -10,7 +10,7 @@ import { CreatorServiceService } from '../creatorservice.service';
 export class ContentCardComponent{
   @Input() contentToDisplay:Content | any;
 
-  constructor(private crtrService: CreatorServiceService){
+  constructor(private entrnService: EntertainmentServiceService){
 
   }
 
@@ -20,10 +20,10 @@ export class ContentCardComponent{
   }
 
   addNewContentToList(event:Content){
-    const contentIndxToUpdate = this.crtrService.sharedContent.findIndex((content: { id: number | null; })=>content.id==event.id);
+    const contentIndxToUpdate = this.entrnService.sharedContent.findIndex(content=>content.id==event.id);
     if (contentIndxToUpdate > -1) {
-      this.crtrService.sharedContent[contentIndxToUpdate] = event;
-      this.crtrService.sharedContent = [...this.crtrService.sharedContent];
+      this.entrnService.sharedContent[contentIndxToUpdate] = event;
+      this.entrnService.sharedContent = [...this.entrnService.sharedContent];
     }
   }
 }

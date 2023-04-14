@@ -1,57 +1,57 @@
 <div style="margin-bottom: 25px;">
-<app-modify-content-component (newContentEvent)="addNewContentToList($event)" buttonAction="Add" [contentToUpdate]="{}"></app-modify-content-component>
+  <app-modify-content-component (newContentEvent)="addNewContentToList($event)" buttonAction="Add" [contentToUpdate]="{}"></app-modify-content-component>
 
-<mat-accordion>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Fetch Content
-      </mat-panel-title>
-      <mat-panel-description>
-        Fetch Content Using Content ID
-      </mat-panel-description>
-    </mat-expansion-panel-header>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Fetch Content
+        </mat-panel-title>
+        <mat-panel-description>
+          Fetch Content Using Content ID
+        </mat-panel-description>
+      </mat-expansion-panel-header>
 
-    <form [formGroup]="userTitleInputForm" (ngSubmit)="onSubmit()">
-      <mat-form-field class="full-width">
-        <mat-label>Enter Content Id:</mat-label>
-        <input id="content-title-field" matInput type="number" formControlName="contentTitleField" placeholder="Content title">
-      </mat-form-field>
-      <button type="submit"  mat-flat-button color="primary">Submit</button>
-    </form>
-    <span *ngIf="displayMsgCode>-2 && userTitleInputForm.value.contentTitleField" [ngStyle]="{'color':displayMsgCode===-1?'Red':'Green'}">
+      <form [formGroup]="userTitleInputForm" (ngSubmit)="onSubmit()">
+        <mat-form-field class="full-width">
+          <mat-label>Enter Content Id:</mat-label>
+          <input id="content-title-field" matInput type="number" formControlName="contentTitleField" placeholder="Content title">
+        </mat-form-field>
+        <button type="submit"  mat-flat-button color="primary">Submit</button>
+      </form>
+      <span *ngIf="displayMsgCode>-2 && userTitleInputForm.value.contentTitleField" [ngStyle]="{'color':displayMsgCode===-1?'Red':'Green'}">
                 {{displayMsgCode===-1?'Title Does not Exist':'Title Exists'}}
             </span>
-  </mat-expansion-panel>
-</mat-accordion>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>
 <app-content-card *ngIf="retrievedContent"
                   [contentToDisplay]="retrievedContent"
 ></app-content-card>
 <mat-divider style="margin:10px"></mat-divider>
 <app-content-card
-  *ngFor="let content of crtrService.sharedContent | contentTypeFilter:'Collaborate';let i = index;"
+  *ngFor="let content of entrnService.sharedContent | contentTypeFilter:'Collaborate';let i = index;"
   [ngClass]="i===0?'firstContent':'generalContent'"
   [contentToDisplay]="content"
   [appHoverAffect]="'contentHover'"
 ></app-content-card>
 <mat-divider style="margin:10px"></mat-divider>
 <app-content-card
-  *ngFor="let content of crtrService.sharedContent | contentTypeFilter:'Singles';let i = index;"
+  *ngFor="let content of entrnService.sharedContent | contentTypeFilter:'Singles';let i = index;"
   [ngClass]="i===0?'firstContent':'generalContent'"
   [contentToDisplay]="content"
   [appHoverAffect]="'contentHover'"
 ></app-content-card>
 <mat-divider style="margin:10px"></mat-divider>
 <app-content-card
-  *ngFor="let content of (crtrService.sharedContent | contentTypeFilter:'Romantic');let i = index;"
+  *ngFor="let content of (entrnService.sharedContent | contentTypeFilter:'Romantic');let i = index;"
   [ngClass]="i===0?'firstContent':'generalContent'"
   [contentToDisplay]="content"
   [appHoverAffect]="'contentHover'"
 ></app-content-card>
 <mat-divider style="margin:10px"></mat-divider>
 <app-content-card
-  *ngFor="let content of (crtrService.sharedContent | contentTypeFilter:'');let i = index;"
+  *ngFor="let content of (entrnService.sharedContent | contentTypeFilter:'');let i = index;"
   [ngClass]="i===0?'firstContent':'generalContent'"
   [contentToDisplay]="content"
   [appHoverAffect]="'contentHover'"

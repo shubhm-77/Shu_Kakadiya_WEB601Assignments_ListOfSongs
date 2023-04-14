@@ -1,12 +1,12 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable,  throwError } from 'rxjs';
+import { catchError, Observable, of, throwError } from 'rxjs';
 import { Content } from './helper-files/content-interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CreatorserviceService {
+export class EntertainmentServiceService {
 
   conentUrl = 'api/content/';
   sharedContent:Content[] = [];
@@ -32,14 +32,4 @@ export class CreatorserviceService {
   putContent(content: Content): Observable<Content>{
     return this.http.put<Content>(this.conentUrl + content.id, content);
   }
-}
-
-export class CreatorServiceService {
-    getContent() {
-        throw new Error('Method not implemented.');
-    }
-    getContentAtId(arg0: number | null) {
-        throw new Error('Method not implemented.');
-    }
-    sharedContent: any;
 }

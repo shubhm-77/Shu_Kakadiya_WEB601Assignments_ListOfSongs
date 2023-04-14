@@ -1,8 +1,8 @@
-
+import { ViewportScroller } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Content } from '../helper-files/content-interface';
-import { CreatorServiceService } from '../creatorservice.service';
+import { EntertainmentServiceService } from '../entertainment-service.service';
 import { MessageService } from '../message.sevice';
 
 @Component({
@@ -20,8 +20,7 @@ export class ContentListComponent {
   });
 
   onSubmit=(id?:number)=>{
-    // @ts-ignore
-    this.crtrService.getContentAtId(id?id:this.userTitleInputForm.controls.contentTitleField.value).subscribe((content)=>{
+    this.entrnService.getContentAtId(id?id:this.userTitleInputForm.controls.contentTitleField.value).subscribe((content)=>{
       this.msgService.clear();
       if (content) {
         this.retrievedContent={...content};
@@ -37,22 +36,21 @@ export class ContentListComponent {
   }
 
   addNewContentToList(event:Content){
-    this.crtrService.sharedContent.push(event);
-    this.crtrService.sharedContent = [...this.crtrService.sharedContent];
+    this.entrnService.sharedContent.push(event);
+    this.entrnService.sharedContent = [...this.entrnService.sharedContent];
   }
 
   constructor(
     private formBuilder: FormBuilder,
-    public crtrService: CreatorServiceService,
+    public entrnService: EntertainmentServiceService,
     private msgService: MessageService
   ){
 
   }
 
   ngOnInit() {
-    // @ts-ignore
-    this.crtrService.getContent().subscribe((content)=>{
-      this.crtrService.sharedContent = content;
+    this.entrnService.getContent().subscribe((content)=>{
+      this.entrnService.sharedContent = content;
       this.msgService.add({status:1,msg:'Content array loaded!'});
       this.onSubmit(4);
       setTimeout(() => {

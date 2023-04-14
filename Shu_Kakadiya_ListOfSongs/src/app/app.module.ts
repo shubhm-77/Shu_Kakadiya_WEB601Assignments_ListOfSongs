@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-// @ts-ignore
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { AppComponent } from './app.component';
@@ -31,9 +30,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
     ContentListComponent,
     ContentTypeFilterPipe,
     HoverAffectDirective,
+    AppMessagesComponent,
     ModifyContentComponentComponent,
-    ModifyContentComponentDialog,
-    AppMessagesComponent
+    ModifyContentComponentDialog
   ],
   imports: [
     BrowserModule,
@@ -53,6 +52,6 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatExpansionModule
   ],
   providers: [],
-  bootstrap: [AppComponent, AppMessagesComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

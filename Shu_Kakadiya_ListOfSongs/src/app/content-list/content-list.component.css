@@ -1,20 +1,11 @@
-.section {
-  padding: 5em;
+.firstContent{
+  border: 2px solid black;
 }
 
-h2 {
-  font-size: 2em;
-  margin-bottom: 1em;
-}
-.content-list {
-  list-style-type: none;
-
-  gap: 1em;
-
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+.generalContent {
+  border: 1px solid #201e1e;
 }
 
-.featured {
-  margin-bottom: 7em;
+.hoverContent {
+  border: 2px dotted red;
 }
