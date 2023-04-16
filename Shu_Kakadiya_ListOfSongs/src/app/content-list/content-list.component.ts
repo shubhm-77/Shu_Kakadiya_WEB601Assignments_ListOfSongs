@@ -44,15 +44,15 @@ export class ContentListComponent {
           1,['Eastside','Friends Keep Secrets','Halsey, Khalid, Benny Blanco']
         ),
         ...{imgURL:''},
-        ...{type:'Pop'},
+        ...{type:'Collaborate'},
         ...{tags:['2018']}
       });
       this.contentListArr.push({
         ...this.generateContent(
           2,['Tonight',`Icarus Falls`,'Zayn Malik']
         ),
-        ...{type:'Pop'},
-        ...{imgURL:''}
+        ...{type:'Singles'},
+        ...{imgURL:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSju-XGuT4m_P4Cq0bX0DE64eHlY_2zLAvFUQ&usqp=CAU'}
       });
       this.contentListArr.push({
         ...this.generateContent(
@@ -64,7 +64,7 @@ export class ContentListComponent {
         ...this.generateContent(
           4,['Itni Si Baat Hain','Azhar','Arijit Singh, Antara Mitra']
         ),
-        ...{type:'Pop'},
+        ...{type:'Romantic'},
         ...{imgURL:''},
         ...{tags:['2016']}
       });

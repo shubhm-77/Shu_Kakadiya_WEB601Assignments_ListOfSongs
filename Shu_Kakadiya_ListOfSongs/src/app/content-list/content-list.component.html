@@ -9,17 +9,17 @@
     </span>
 </div>
 <app-content-card
-  *ngFor="let content of contentListArr | contentTypeFilter:'Movie';let i = index;"
+  *ngFor="let content of contentListArr | contentTypeFilter:'Collaborate';let i = index;"
   [ngStyle]="{'border': i==0?'2px solid black':'1px solid #201e1e'}"
   [contentToDisplay]="content"
 ></app-content-card>
 <app-content-card
-  *ngFor="let content of contentListArr | contentTypeFilter:'Sitcom';let i = index;"
+  *ngFor="let content of contentListArr | contentTypeFilter:'Singles';let i = index;"
   [ngStyle]="{'border': i==0?'2px solid black':'1px solid #201e1e'}"
   [contentToDisplay]="content"
 ></app-content-card>
 <app-content-card
-  *ngFor="let content of (contentListArr | contentTypeFilter:'Web-Series');let i = index;"
+  *ngFor="let content of (contentListArr | contentTypeFilter:'Romantic');let i = index;"
   [ngStyle]="{'border': i==0?'2px solid black':'1px solid #201e1e'}"
   [contentToDisplay]="content"
 ></app-content-card>

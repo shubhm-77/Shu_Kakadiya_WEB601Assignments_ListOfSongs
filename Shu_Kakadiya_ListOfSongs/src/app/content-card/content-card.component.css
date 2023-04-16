@@ -4,7 +4,6 @@
 }
 .content{
   display:block;
-  background:#b7b697a1;
   color: #000;
   text-align:justify;
   margin: 0.3%;
@@ -15,15 +14,15 @@
   display: block;
 }
 
-.content-Movie{
+.content-Collaborate{
   background: #46ff0aa1;
 }
 
-.content-Sitcom{
+.content-Singles{
   background: #3636ea99;
 }
 
-.content-Web-Series {
+.content-Romantic {
   background: #f38484;
 }
 
@@ -46,3 +45,4 @@
   margin-bottom: 10px;
   display: block;
 }
+
