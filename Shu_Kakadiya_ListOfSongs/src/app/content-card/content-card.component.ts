@@ -1,16 +1,14 @@
+
 import { Component, Input } from '@angular/core';
 import { Content } from '../helper-files/content-interface';
 
 @Component({
   selector: 'app-content-card',
   templateUrl: './content-card.component.html',
-  styleUrls: ['./content-card.component.scss']
+  styleUrls: ['./content-card.component.css']
 })
 export class ContentCardComponent{
-  [x: string]: any;
   @Input() contentToDisplay:Content | any;
-  tag: any;
-  i: any;
 
   constructor(){
 
@@ -21,4 +19,5 @@ export class ContentCardComponent{
     console.log(`TITLE: ${contentInfoToLog.title}`)
   }
 
+  //totalContents = this.initContent.contentArr
 }

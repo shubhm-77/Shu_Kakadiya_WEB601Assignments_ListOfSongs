@@ -4,15 +4,31 @@
     <input id="content-title-field" formControlName="contentTitleField" placeholder="Content title">
     <button type="submit">Submit</button>
   </form>
-  <span *ngIf="displayMsgCode>-2 && userTitleInputForm.value.contentTitleField" [ngStyle]="{'color':displayMsgCode===-1?'Blue':'Green'}">
+  <span *ngIf="displayMsgCode>-2 && userTitleInputForm.value.contentTitleField" [ngStyle]="{'color':displayMsgCode===-1?'Red':'Green'}">
         {{displayMsgCode===-1?'Title Does not Exist':'Title Exists'}}
     </span>
 </div>
 <app-content-card
-  *ngFor="let content of contentListArr | contentTypeFilter:'Songs';let i = index;"
+  *ngFor="let content of contentListArr | contentTypeFilter:'Collaborate';let i = index;"
   [ngClass]="i===0?'firstContent':'generalContent'"
   [contentToDisplay]="content"
   [appHoverAffect]="'contentHover'"
 ></app-content-card>
-
-
+<app-content-card
+  *ngFor="let content of contentListArr | contentTypeFilter:'Singles';let i = index;"
+  [ngClass]="i===0?'firstContent':'generalContent'"
+  [contentToDisplay]="content"
+  [appHoverAffect]="'contentHover'"
+></app-content-card>
+<app-content-card
+  *ngFor="let content of (contentListArr | contentTypeFilter:'Romantic');let i = index;"
+  [ngClass]="i===0?'firstContent':'generalContent'"
+  [contentToDisplay]="content"
+  [appHoverAffect]="'contentHover'"
+></app-content-card>
+<app-content-card
+  *ngFor="let content of (contentListArr | contentTypeFilter:'');let i = index;"
+  [ngClass]="i===0?'firstContent':'generalContent'"
+  [contentToDisplay]="content"
+  [appHoverAffect]="'contentHover'"
+></app-content-card>
