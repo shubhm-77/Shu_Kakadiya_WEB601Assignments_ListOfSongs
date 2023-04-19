@@ -32,7 +32,7 @@ export class ModifyContentComponentComponent {
       data
     });
 
-    dialogRef.afterClosed().subscribe(async (result) => {
+    dialogRef.afterClosed().subscribe(async (result: { event: string; data: Content; }) => {
       await this.onCreateNewContentSubmit(result.event,result.data);
     })
   }

@@ -4,6 +4,7 @@ import { FormBuilder } from '@angular/forms';
 import { Content } from '../helper-files/content-interface';
 import { EntertainmentServiceService } from '../entertainment-service.service';
 import { MessageService } from '../message.sevice';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-content-list',
@@ -52,7 +53,7 @@ export class ContentListComponent {
     this.entrnService.getContent().subscribe((content)=>{
       this.entrnService.sharedContent = content;
       this.msgService.add({status:1,msg:'Content array loaded!'});
-      this.onSubmit(4);
+      //this.onSubmit(4);
       setTimeout(() => {
         this.msgService.clear();
       }, 2000);
